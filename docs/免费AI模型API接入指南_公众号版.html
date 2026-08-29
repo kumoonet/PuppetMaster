@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>稳定的傀儡编排AI模型API接入指南 · 公众号版</title>
+<style>
+  body{margin:0;background:#f5f5f0;padding:36px 16px;font-family:-apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif;}
+  .preview{max-width:640px;margin:0 auto;background:#fff;padding:28px 22px;border-radius:8px;}
+  .note-tip{background:#fff8f0;padding:12px 16px;margin-bottom:24px;font-size:12px;color:#666;line-height:1.6;border-radius:6px;border-left:3px solid #E8730A;}
+</style>
+</head>
+<body>
+<div class="preview">
+<div class="note-tip">
+  <strong style="color:#E8730A;">⚠️ 使用方法</strong>：全选下方内容（Ctrl+A）→ 复制（Ctrl+C）→ 粘贴到公众号编辑器。所有样式已内联，复制范围在「公众号正文开始 / 结束」之间。如粘贴后某段样式丢失，重贴该段即可。
+</div>
+<!-- 公众号正文开始 -->
+<section style="font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;color:#1a1a1a;line-height:1.6;max-width:640px;">
+
+  <p style="font-size:14px;font-weight:700;margin:0 0 18px;"><span style="color:#E8730A;">「</span>弱者投资体系-KuMoo<span style="color:#E8730A;">」</span></p>
+
+  <p style="font-size:22px;font-weight:700;color:#E8730A;margin:0 0 6px;line-height:1.4;">稳定的傀儡编排 AI 模型 API 接入指南</p>
+  <p style="font-size:15px;font-weight:400;color:#555;margin:0 0 8px;line-height:1.6;">收编稳定接口当数字傀儡，免费只是福利</p>
+
+  <p style="font-size:12px;color:#767676;margin:0 0 16px;line-height:1.6;">覆盖 8 平台实测 + 多元搜索 16 平台新发现 · 2026-08-22 实测 · AI 辅助整理</p>
+
+  <p style="font-size:14px;color:#666;margin:0 0 22px;line-height:1.6;">不谈谁最强，只谈谁扛得住日常用量还划算。免费 ≠ 可用，便宜 ≠ 划算——不稳的免费等于不可用。本指南的视角是「傀儡编排」：这些 API 不只是拿来聊天，更能收编成受你指挥的数字傀儡，专职干四类基础活（文本分类、打标、摘要、改写），像听话的干将一样随时调用。用编排和兜底，把一群不稳定的廉价资源驯化成稳定可靠的产出管道。覆盖 8 个平台 + 多元搜索新发现的 16 个平台，免费档与高性价比付费档全部标注价格。</p>
+
+  <section style="background:#1a1a1a;color:#fff;border-radius:6px;padding:20px 24px;margin:0 0 24px;font-size:16px;line-height:1.8;font-weight:700;text-align:center;">
+    核心结论：稳定性优先于价格。找的不是「免费模型」，是「干四类基础活（分类/打标/摘要/改写）、稳定可支配的傀儡接口」——免费只是福利，稳定才是命。更关键的是编排：用中央编排者调度一群异构傀儡 + 三层兜底（级联）+ 一致性交叉验证，把不稳定的廉价接口驯化成稳定产出管道。Agnes AI 三模态全永久免费（国内站实测 0.7s，推理模型）+ DeepSeek ¥1/百万输入，是当前最优「免费 + 高性价比」组合。  文中每个平台均标注付费档价格。
+  </section>
+
+  <table style="width:100%;border-collapse:collapse;margin:0 0 24px;">
+    <tr>
+      <td style="width:25%;text-align:center;padding:12px 4px;font-size:22px;font-weight:700;color:#1a1a1a;line-height:1.4;">8<br><span style="font-size:11px;font-weight:400;color:#999;">平台实测</span></td>
+      <td style="width:25%;text-align:center;padding:12px 4px;font-size:22px;font-weight:700;color:#1a1a1a;line-height:1.4;">16+<br><span style="font-size:11px;font-weight:400;color:#999;">新平台发现</span></td>
+      <td style="width:25%;text-align:center;padding:12px 4px;font-size:22px;font-weight:700;color:#1a1a1a;line-height:1.4;">0.7s<br><span style="font-size:11px;font-weight:400;color:#999;">最快响应</span></td>
+      <td style="width:25%;text-align:center;padding:12px 4px;font-size:22px;font-weight:700;color:#1a1a1a;line-height:1.4;">¥1/百万<br><span style="font-size:11px;font-weight:400;color:#999;">最低成本</span></td>
+    </tr>
+  </table>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">一、首推：Agnes AI</section>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 12px;">Agnes AI 是新加坡 Sapiens AI 实验室推出的全模态平台，2026年7月发布的 <code style="font-size:13px;background:#f5f5f0;padding:2px 6px;border-radius:3px;color:#E8730A;">agnes-2.5-flash</code> 是其主力免费模型。官方承诺：网页端、移动端、桌面客户端及开发者 API 均不限期免费，无 Token 计费、无订阅门槛、无需绑定信用卡。</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">文本模型</b>：agnes-2.5-flash（主力）、agnes-2.0-flash（老版仍可用）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">图像模型</b>：agnes-image-2.1-flash（文生图/图生图）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">视频模型</b>：agnes-video-v2.0（原生音画同步）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 12px;">· <b style="color:#1a1a1a;">付费版</b>：agnes-2.5-pro（商业稳定版，$0.45/$0.90 per M tokens）</p>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">二、Agnes 配置速查</section>
+
+  <table style="width:100%;border-collapse:collapse;font-size:13px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:8px 10px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">配置项</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:8px 10px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">值</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">国内 API Base URL</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:12px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">https://apihub.agnes-ai.cn/v1</code></td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">国际 API Base URL</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:12px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">https://apihub.agnes-ai.com/v1</code></td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">注册平台（国内）</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:12px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">platform.agnes-ai.cn</code></td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">注册平台（国际）</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:12px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">platform.agnes-ai.com</code></td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">接口格式</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#333;">OpenAI 兼容 / Anthropic 兼容</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">主力模型名</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:12px;background:#f5f5f0;padding:2px 6px;border-radius:3px;color:#E8730A;">agnes-2.5-flash</code></td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">上下文窗口</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#333;">512K / 128K（不同来源口径有差异）</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">速率限制</td>
+        <td style="padding:8px 10px;border-bottom:1px solid #eee;color:#333;">约 20 RPM（免费用户）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <section style="background:#f7f7f5;padding:12px 16px;margin:16px 0;border-radius:4px;border:1px solid #eee;border-left:3px solid #16a34a;">
+    <p style="font-size:13px;line-height:1.7;color:#555;margin:0;"><b style="color:#1a1a1a;">⚠️ 注意：国内站与国际站账号不互通</b><br>国内注册用 <code style="font-size:12px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">platform.agnes-ai.cn</code>，API 地址用 <code style="font-size:12px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">apihub.agnes-ai.cn</code>；国际站用 <code style="font-size:12px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">platform.agnes-ai.com</code>，API 地址用 <code style="font-size:12px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">apihub.agnes-ai.com</code>。</p>
+  </section>
+
+  <section style="background:#f0f7f0;padding:12px 16px;margin:0 0 14px;border-radius:4px;border:1px solid #eee;border-left:3px solid #16a34a;">
+    <p style="font-size:13px;line-height:1.7;color:#555;margin:0;"><b style="color:#16a34a;">✅ 升级方式</b><br>从 2.0 → 2.5 只需改一行模型名。Base URL、API Key、消息格式全部不变。</p>
+  </section>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">三、WorkBuddy 接入步骤</section>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">Step 1</b>：访问 <code style="font-size:13px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">platform.agnes-ai.cn</code> 注册账号，进入控制台创建 API Key</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">Step 2</b>：在 WorkBuddy 聊天框顶部模型选择器，点击「配置自定义模型」</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">Step 3</b>：提供商选 <b>Custom</b>，Base URL 填 <code style="font-size:13px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">https://apihub.agnes-ai.cn/v1</code>，模型名填 <code style="font-size:13px;background:#f5f5f0;padding:2px 6px;border-radius:3px;color:#E8730A;">agnes-2.5-flash</code></p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 12px;">· <b style="color:#1a1a1a;">Step 4</b>：保存后发送一条测试消息，确认连通</p>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">四、其他免费 / 低成本模型对比</section>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 12px;">Agnes 之外还有 7 个平台提供免费或低成本 API，但限制条件各不相同。下面按"能不能白嫖住日常"逐一核实。</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">平台</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">主力模型</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">免费额度</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">限制</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">国内直连</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">智谱 AI</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">glm-4-flash</code> / <code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">glm-4.7-flash</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">免费模型永久免费 + 新用户2500万Token</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">免费档实测 0.4-2.2s；仅 flash 系列免费，付费模型需充值（无余额报错1113）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">✅</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">DeepSeek</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">deepseek-chat</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">新用户约$2 / 500万Token</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">¥1/百万输入（用完后）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">✅</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Google Gemini</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">gemini-2.5-flash</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">10 RPM / 250 RPD</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">需代理</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f85149;font-weight:600;">❌ 需代理</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">硅基流动</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">Qwen2.5-7B 等</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">指定模型免费 / 新用户2000万Token</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">仅指定模型免费</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">✅</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">NVIDIA NIM</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">DeepSeek V4 Flash 等</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">注册送1000-5000 credits</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">约40 RPM</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">⚠️ 待确认</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">GitHub Models</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">GPT-4o / Llama 3.3</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">15 RPM / 150 RPD</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">每请求8K in / 4K out</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f85149;font-weight:600;">❌ 需代理</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">OpenRouter</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">Nemotron / Llama / GLM 等（18个免费模型）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">20 RPM / 50 RPD（免费档）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">部分热门模型上游 429 限流；充值$10后升至1000 RPD</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">✅ 可直连（实测）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:14px;font-weight:600;color:#1a1a1a;margin:18px 0 8px;">各平台接入配置速查</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">平台</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">注册地址</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">Base URL / 模型名</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Agnes AI</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">platform.agnes-ai.cn</code>（国内）/ <code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">.com</code>（国际）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">https://apihub.agnes-ai.cn/v1</code> / <code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">agnes-2.5-flash</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">智谱 AI</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">open.bigmodel.cn</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">https://open.bigmodel.cn/api/paas/v4</code> / <code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">glm-4-flash</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">DeepSeek</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">platform.deepseek.com</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">https://api.deepseek.com/v1</code> / <code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">deepseek-chat</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Google Gemini</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">aistudio.google.com</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">https://generativelanguage.googleapis.com/v1beta/openai/</code> / <code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">gemini-2.5-flash</code>（需代理）</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">硅基流动</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">cloud.siliconflow.cn</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">https://api.siliconflow.cn/v1</code> / 指定免费模型</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">NVIDIA NIM</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">build.nvidia.com</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">https://integrate.api.nvidia.com/v1</code> / 各模型</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">GitHub Models</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">github.com/marketplace/models</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">https://models.github.ai/inference</code> / <code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">gpt-4o</code> 等（需代理）</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">OpenRouter</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">openrouter.ai</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">https://openrouter.ai/api/v1</code> / <code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">模型名:free</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">五、8 平台实测稳定性一览（2026-08-22）</section>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 12px;">口径：稳定性优先于免费——免费但慢/不稳 = 不可用。标注「✅实测」为当日真实 API 调用结果，标注「📚」为公开资料核实。</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">平台 / 模型</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">实测响应</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">稳定性</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">结论</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Agnes AI（国内站）<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">agnes-2.5-flash</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">0.7s（推理模型，国内站实测）✅</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">最稳</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">✅ 首推，质量最高</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Agnes AI<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">agnes-2.5-pro</code>（免费档）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">0.5-3.3s，偶发30s超时 ✅实测</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">不稳</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">⚠️ 免费档不稳定，不建议主力</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">智谱 AI<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">glm-4-flash</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">0.4-2.2s ✅实测</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">基本稳定</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">✅ 可主力备选</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">智谱 AI<br>glm-4 / 4.5 / 4.7 等付费模型</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">—</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f85149;font-weight:600;">不可用</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f85149;font-weight:600;">❌ 账户无余额报错1113「余额不足」</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">OpenRouter<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">nemotron-3-nano-omni:free</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">1.1-1.4s ✅实测</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">稳定</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">✅ 国内可直连，不需代理</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">OpenRouter<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">glm-5.2:free</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">429 上游限流 ✅实测</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f85149;font-weight:600;">不稳</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">⚠️ 热门免费模型需重试</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">DeepSeek<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">deepseek-chat</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">5-9s，高峰503 📚</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">高峰不稳</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">⚠️ 付费前先测</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Google Gemini<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">gemini-2.5-flash</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">需代理 📚</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">网络不稳</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">⚠️ 需代理，国内不推荐</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">硅基流动<br>Qwen2.5-7B 等</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">免费档 3RPM 📚</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">限流紧</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">⚠️ 免费档可用性差</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">NVIDIA NIM<br>DeepSeek V4 Flash 等</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">约40 RPM 📚</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">官方稳定</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">✅ 吞吐高，值得一试</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">GitHub Models<br>GPT-4o / Llama 等</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">15 RPM / 150 RPD 📚</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">稳定但紧</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">⚠️ 需代理 + 限流紧</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 12px;"><b style="color:#1a1a1a;">实测响应速度排名（快 → 慢）</b><br>
+  1. 智谱 glm-4-flash 0.4-2.2s<br>
+  2. Agnes agnes-2.0-flash 约 1.3s（非推理，简单快）<br>
+  3. Agnes agnes-2.5-flash 0.7s 首帧（推理模型，质量最高）<br>
+  4. OpenRouter nemotron free 1.1-1.4s<br>
+  5. Agnes agnes-2.5-pro 0.5-3.3s（不稳）</p>
+
+  <p style="font-size:14px;font-weight:600;color:#1a1a1a;margin:18px 0 8px;">付费档价格速览（2026-08 核实，变动快以官网为准）</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">平台</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">付费模型</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">价格（每百万 Token）</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Agnes AI</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">agnes-2.5-pro</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">$0.45 输入 / $0.90 输出</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">DeepSeek</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">deepseek-chat</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">输入 ¥1 / 输出 ¥2（性价比标杆）</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">DeepSeek</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">deepseek-reasoner</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">高于 chat，以官网为准</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">智谱 AI</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">glm-4.5 / glm-4.7 等</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">按量计费（无余额不可用），以官网为准</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Google Gemini</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">2.5-flash / pro</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">免费层外按量计费，以官网为准</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">硅基流动 / NVIDIA / 其他</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">全量模型</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">按量计费，价格因模型而异，以官网为准</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">OpenRouter</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">非 <code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">:free</code> 模型</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">按上游定价（约 $0.1-10 区间），以官网为准</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">GitHub Models</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">—</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">免费预览期，暂无付费</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">六、多元搜索新发现：更多免费平台（📚 公开资料核实）</section>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 12px;">除上述 8 平台外，多元搜索还发现以下免费/低成本平台，尚未逐一实测，标注「来源」供参考。优先关注：<b style="color:#1a1a1a;">讯飞星火（永久无限 Token）、阿里百炼（国内直连生态全）</b>；Groq、Cerebras 速度/额度惊人但<b style="color:#f85149;">国内需代理</b>（2026-08-22 实测 403 封锁）。</p>
+
+  <p style="font-size:14px;font-weight:600;color:#1a1a1a;margin:18px 0 8px;">国际平台</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">平台</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">免费额度 / 付费价</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">亮点</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">限制 / 注册</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Groq</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">永久免费 ~30 RPM<br><span style="color:#333;">付费：按量计费</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><b style="color:#1a1a1a;">速度之王</b>，LPU 硬件 1000+ tok/s</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f85149;font-weight:600;">⚠️ 国内需代理（实测 403，官方封锁大陆 IP）<br><span style="color:#333;">模型范围有限（Llama/Qwen）<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">console.groq.com</code></span></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Cerebras</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">~100万 Token/天<br><span style="color:#333;">付费：按量计费</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><b style="color:#1a1a1a;">额度之王</b>，2000 tok/s</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f85149;font-weight:600;">⚠️ 国内需代理（Cloudflare 明确封禁 CN 地区，实测 403）<br><span style="color:#333;">仅美欧区域，亚洲 Q4 开放；模型有限（Qwen3 235B/Llama）<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">cloud.cerebras.ai</code></span></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Mistral AI</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">Experiment 档 ~10亿 tokens/月<br><span style="color:#333;">付费：Pro 档 $10/月起</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">额度巨大</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">⚠️ 免费档需同意数据训练<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">console.mistral.ai</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Cohere</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">~1000 次调用/月<br><span style="color:#333;">付费：按量计费</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">RAG 场景（Command R+）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">仅非商业用途<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">dashboard.cohere.com</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Cloudflare Workers AI</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">1万 Neurons/天（约1万请求）<br><span style="color:#333;">付费：超出按 Neurons 计费</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">边缘部署，39 个模型</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">上下文较小（2K-8K）<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">dash.cloudflare.com</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Hugging Face</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">100K credits/月<br><span style="color:#333;">付费：按量计费</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">开源模型最全</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">社区额度，波动大<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">huggingface.co</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Ollama Cloud</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">永久免费<br><span style="color:#333;">暂无付费</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">本地推理云端化，13 模型</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">模型较小<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">cloud.ollama.com</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">SambaNova</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">每模型 20万 tokens/日<br><span style="color:#333;">付费：按量计费</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">高速开源模型</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">⚠️ 部分档需信用卡<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">cloud.sambanova.ai</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">ModelScope 魔搭（阿里）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">魔粒制：每日登录 150 魔粒（≈旗舰 75 次/天）<br><span style="color:#333;">做满任务最高 600 魔粒（≈300 次/天）</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">55 模型，国内延迟低</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">⚠️ 2026-08 改版：原"每日2000次免费"改为魔粒扣费（旗舰2/次、标准1/次）<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">modelscope.cn</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:14px;font-weight:600;color:#1a1a1a;margin:18px 0 8px;">国内平台</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">平台</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">免费额度 / 付费价</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">亮点</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">限制 / 注册</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">阿里云百炼<br>（通义千问）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">新用户每模型 100万 Token（90-180天）+ 每日 500 次<br><span style="color:#333;">付费：qwen-turbo 约 ¥0.3/百万输入级，以官网为准</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">生态最全，qwen-turbo/plus/max</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">QPS 限速 1-2；每账号一次<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">bailian.console.aliyun.com</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Kimi（月之暗面）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">新用户赠送额度<br><span style="color:#333;">付费：按量计费，以官网为准</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">长文本理解强（200K）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">API 能力弱于网页版<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">platform.moonshot.cn</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">MiniMax</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">新用户赠送额度<br><span style="color:#333;">付费：按量计费</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">大参数（456B）</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">按平台规则<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">api.minimax.chat</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">讯飞星火</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">SparkLite <b>永久无限 Token</b><br><span style="color:#333;">付费：SparkPro/4.0 按量计费</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">免费联网搜索 + 多模态</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">QPS 仅 2<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">xinghuo.xfyun.cn/sparkapi</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">腾讯混元</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">HunyuanLite 永久免费<br><span style="color:#333;">付费：Standard/Pro 按量计费</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">轻量快响应</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">并发限制 5 路<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">cloud.tencent.com</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">百度千帆/文心</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">每日约 500 次免费调用（约1.6万 Token）<br><span style="color:#333;">付费：ERNIE 系列按量计费</span></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">中文理解好</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">需实名认证<br><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">qianfan.cloud.baidu.com</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">七、全模态免费对比（文本/图像/视频）</section>
+
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">能力</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">平台</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">模型</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">状态</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">文本</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">Agnes AI</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">agnes-2.5-flash</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">永久免费</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">图像</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">Agnes AI</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">agnes-image-2.1-flash</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">永久免费</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">视频</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">Agnes AI</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">agnes-video-v2.0</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">永久免费</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">图像</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">智谱</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">cogview-3-flash</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">免费</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">视频</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">智谱</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">cogvideox-flash</code></td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">免费</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">图像</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">Pollinations AI</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">免 Key，URL 即接口</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">免费（<code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">image.pollinations.ai/prompt/{描述}</code>）</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">图像</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">硅基流动</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">Stable Diffusion 系列</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f59e0b;font-weight:600;">免费额度</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 12px;"><b style="color:#1a1a1a;">结论</b>：Agnes AI 仍是唯一同时覆盖文本/图像/视频三模态且全部永久免费的平台。</p>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">八、注意事项</section>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">1. <b style="color:#1a1a1a;">免费 ≠ 稳定</b>：免费档普遍限流（RPM/RPD），高峰会排队，以实测为准。</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">2. <b style="color:#1a1a1a;">账户余额</b>：智谱等平台免费模型可调，但付费模型需充值（无余额报 1113）。</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">3. <b style="color:#1a1a1a;">代理问题</b>：Gemini、GitHub Models 需代理；OpenRouter 实测国内可直连（无需代理）。</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">4. <b style="color:#1a1a1a;">数据训练</b>：Mistral Experiment 档、部分平台免费档会拿你的数据训练，敏感数据慎用。</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">5. <b style="color:#1a1a1a;">政策变动快</b>：免费额度/模型随时调整，以官网最新为准。</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">6. <b style="color:#1a1a1a;">免信用卡</b>：Groq、Cerebras、NVIDIA NIM、OpenRouter、Cloudflare 等 29/31 平台无需信用卡。</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">7. <b style="color:#1a1a1a;">高性价比 ≠ 便宜</b>：DeepSeek ¥1/百万输入是当前性价比标杆；付费前先小额测试稳定性（如高峰 503）。</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">8. <b style="color:#1a1a1a;">价格口径</b>：文中价格为 2026-08 核实或公开资料，付费价格变动快，调用前以各平台官网定价页为准。</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 12px;">9. <b style="color:#1a1a1a;">地区封锁（实测）</b>：Groq（console/api）与 Cerebras（cloud/inference）对大陆 IP 直接 403 封锁，需代理；Cerebras Cloudflare 拦截页明确标注禁止 CN 地区（2026-08-22 实测）。标注「⚠️ 需代理」的平台均无法国内直连。</p>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">九、API Key 获取清单（快速入口）</section>
+
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">平台</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">拿 Key 入口</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Agnes</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">platform.agnes-ai.cn</code> → 控制台 → API Keys</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">智谱</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">open.bigmodel.cn</code> → API Keys</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">DeepSeek</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">platform.deepseek.com</code> → API Keys</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Gemini</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">aistudio.google.com</code> → Get API Key</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">硅基流动</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">cloud.siliconflow.cn</code> → 账户 → API 密钥</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">NVIDIA NIM</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">build.nvidia.com</code> → 各模型页 Get API Key</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">GitHub Models</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">github.com/settings/tokens</code>（需开通 Models 预览）</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">OpenRouter</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">openrouter.ai/keys</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">Groq</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">console.groq.com/keys</code></td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">阿里百炼</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">bailian.console.aliyun.com</code> → API-KEY 管理</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">讯飞星火</td>
+        <td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;"><code style="font-size:11px;background:#f5f5f0;padding:2px 4px;border-radius:3px;">xinghuo.xfyun.cn/sparkapi</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">十、傀儡编排玩法（我的理念）</section>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">日常聊天只是这些 API 的入门用法。真正的高性价比用法是<b style="color:#1a1a1a;">收编成傀儡</b>——让稳定的接口专职干四类基础活：</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:13px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 10px;text-align:left;border-bottom:1px solid #d4d4d4;width:18%;"><span style="color:#666;">基础活</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 10px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">干什么</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="padding:7px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">分类</td>
+        <td style="padding:7px 10px;border-bottom:1px solid #eee;color:#333;">一段文本属于哪个类别（财经/科技/电商…），或判断搜索结果是否相关</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">打标</td>
+        <td style="padding:7px 10px;border-bottom:1px solid #eee;color:#333;">从文本里提取 3-5 个关键词标签</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">摘要</td>
+        <td style="padding:7px 10px;border-bottom:1px solid #eee;color:#333;">长文压缩成几句话</td>
+      </tr>
+      <tr>
+        <td style="padding:7px 10px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">改写</td>
+        <td style="padding:7px 10px;border-bottom:1px solid #eee;color:#333;">换风格重写（口语化/正式/轻松）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 12px;">四个稳定接口 = 四个同时干活的傀儡（如 agnes-2.5 / agnes-2.0 / glm-4-flash / 讯飞 lite 并行处理不同任务）。免费接口变动快（可能突然收费或断线），建议收编前实测、并定期体检可用性——稳定性才是选接口的第一标准。</p>
+
+  <p style="font-size:14px;font-weight:600;color:#333;margin:24px 0 8px;">🎯 为什么这么干（傀儡编排的底层逻辑）</p>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">这不是随便堆几个免费接口，而是一套有讲究的编排：<br>
+  · <b style="color:#1a1a1a;">中央编排者</b>：你（或主模型）是总指挥，只分派任务、不亲自干苦力，把四类基础活全甩给傀儡。<br>
+  · <b style="color:#1a1a1a;">异构傀儡池</b>：每个傀儡特长不同（agnes-2.5 推理强、glm-4-flash 交叉验证、agnes-2.0 打标摘要快、lite 兜底便宜），按活儿挑人，不指望一个接口包打天下。<br>
+  · <b style="color:#1a1a1a;">三层兜底（级联）</b>：主力傀儡挂了→换备胎→再不行主模型亲自上。免费接口随时可能崩，级联保证任务不卡死。<br>
+  · <b style="color:#1a1a1a;">一致性即置信度</b>：同一道题让两个傀儡各做一遍，答案一致就放心用，不一致就当存疑——用"交叉验证"替代"盲信单个模型"。<br>
+  说白了：<b style="color:#1a1a1a;">用一群便宜但不稳定的傀儡 + 一套兜底规则，换一个永远不掉链子的稳定产出。</b></p>
+
+  <p style="font-size:14px;font-weight:600;color:#333;margin:24px 0 8px;">🔬 不是拍脑袋：这套理念被前沿研究独立验证过</p>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">我把"傀儡"命名拿去做学术检索，发现它和 2025-2026 年 AI 工程的前沿方向<b style="color:#1a1a1a;">同构</b>——学术圈叫「Puppeteer Pattern」（木偶师范式，NeurIPS 2025）：中央编排者动态指挥一群专用傀儡，而不是一个通用大模型干所有事。更关键的是，我的几个核心设计被研究系统性验证过：<br>
+  · <b style="color:#1a1a1a;">异构傀儡池（四傀儡分工）</b>：对应学术的「专用傀儡分工」——方向完全正确，不是我自嗨。<br>
+  · <b style="color:#1a1a1a;">双模型交叉一致→高置信</b>：学术证实「一致性检查」是最可靠的置信度信号之一，比模型自己说"我有信心"靠谱得多。<br>
+  · <b style="color:#1a1a1a;">三层兜底（级联）</b>：就是学术「Cascading 级联」的工程落地——先小模型试，不行再升级，成本控制有据可循。<br>
+  · <b style="color:#1a1a1a;">成本门控（按档位开傀儡）</b>：对应学术「成本感知奖励」的显式规则版。<br>
+  · <b style="color:#1a1a1a;">2 傀儡并行不贪多</b>：学术证实 2-3 个聚焦 worker 优于 10 个并行（上下文争用 + 协调开销，多不一定好）——我的克制是对的。<br>
+  所以这不是"找免费模型凑合用"，而是一套<b style="color:#1a1a1a;">被独立研究背书过的工程哲学</b>：用编排和兜底，把一群不稳定的廉价资源，驯化成稳定可靠的产出管道。</p>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">十一、省 Token 实测（图）+ 六维增量价值</section>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">2026-08-23 用真实 API 计费口径（读 <code style="font-size:13px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">usage.prompt_tokens</code> / <code style="font-size:13px;background:#f5f5f0;padding:2px 6px;border-radius:3px;">completion_tokens</code>）实测 8 类傀儡干活。对比「主模型直读原文」vs「傀儡加工后主模型只读结果」：</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">任务</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">类型</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">省 prompt</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">省 total</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">classify</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">输入密集</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">97%</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">94%</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">tags</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">输入密集</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">92%</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">92%</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">route</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">输入密集</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">84%</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">90%</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">summarize</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">输入密集</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">59%</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">82%</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">extract</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">输出密集</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f85149;font-weight:600;">-104%</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">31%</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">translate</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">输出密集</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f85149;font-weight:600;">-38%</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">52%</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">proscons</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">输出密集</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f85149;font-weight:600;">-68%</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">42%</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">explain</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">输出密集</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#f85149;font-weight:600;">-115%</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#16a34a;font-weight:600;">27%</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:14px;font-weight:600;color:#1a1a1a;margin:18px 0 8px;">省 total 对比（输入密集 vs 输出密集 vs 全类型均值）</p>
+
+  <svg width="100%" viewBox="0 0 640 240" style="margin:0 0 14px;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;">
+    <rect x="0" y="0" width="640" height="240" fill="#ffffff"/>
+    <!-- 基线 -->
+    <line x1="120" y1="20" x2="120" y2="200" stroke="#d4d4d4" stroke-width="1"/>
+    <line x1="120" y1="200" x2="600" y2="200" stroke="#d4d4d4" stroke-width="1"/>
+    <!-- 刻度 -->
+    <text x="116" y="205" font-size="10" fill="#999" text-anchor="end">0%</text>
+    <text x="250" y="205" font-size="10" fill="#999" text-anchor="middle">25%</text>
+    <text x="380" y="205" font-size="10" fill="#999" text-anchor="middle">50%</text>
+    <text x="510" y="205" font-size="10" fill="#999" text-anchor="middle">75%</text>
+    <text x="600" y="205" font-size="10" fill="#999" text-anchor="end">100%</text>
+    <!-- 输入密集 78% -> 长 78% of 480 = 374 -->
+    <rect x="120" y="50" width="374" height="30" rx="3" fill="#16a34a"/>
+    <text x="502" y="70" font-size="13" fill="#1a1a1a" font-weight="700">78%</text>
+    <text x="112" y="70" font-size="12" fill="#1a1a1a" text-anchor="end" font-weight="600">输入密集</text>
+    <!-- 全类型 64% -> 长 307 -->
+    <rect x="120" y="100" width="307" height="30" rx="3" fill="#E8730A"/>
+    <text x="435" y="120" font-size="13" fill="#fff" font-weight="700">64%</text>
+    <text x="112" y="120" font-size="12" fill="#1a1a1a" text-anchor="end" font-weight="600">全类型</text>
+    <!-- 输出密集 40% -> 长 192 -->
+    <rect x="120" y="150" width="192" height="30" rx="3" fill="#f59e0b"/>
+    <text x="320" y="170" font-size="13" fill="#1a1a1a" font-weight="700">40%</text>
+    <text x="112" y="170" font-size="12" fill="#1a1a1a" text-anchor="end" font-weight="600">输出密集</text>
+    <text x="120" y="230" font-size="11" fill="#666;">绿色=输入密集省 total 78% · 橙色=全类型均值 64% · 黄色=输出密集省 total 40%（prompt 倒挂但 total 仍省）</text>
+  </svg>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">**关键结论**：① 输入密集（分类/打标/路由/摘要）最划算，省 total 78%；② 输出密集（翻译/利弊/解释/提取）prompt 倒挂，但 total 仍省 40%——省的是主模型生成而非输入；③ 全类型省 total 64%；④ <b style="color:#1a1a1a;">短文本（&lt;100 字）不加工</b>，直接主模型读。</p>
+
+  <p style="font-size:14px;font-weight:600;color:#1a1a1a;margin:18px 0 8px;">六维增量价值（省 token 只是第 1 维）</p>
+
+  <table style="width:100%;border-collapse:collapse;font-size:12px;margin:0 0 14px;">
+    <thead>
+      <tr>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;width:14%;"><span style="color:#666;">维度</span></th>
+        <th style="background:#f5f5f0;color:#666;font-weight:600;padding:7px 8px;text-align:left;border-bottom:1px solid #d4d4d4;"><span style="color:#666;">内容 + 为什么根本</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">① 省 token</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">全类型 total 省 64%；省的是"量"与"窗口"，防限流、防上下文不够</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">② 并行干活</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">5 傀儡 = 5 子代理同时跑，主模型不排队，批量时间减半</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">③ 专注度</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">主模型只读加工后精华，不被原文噪音稀释（如 10 条官网导航）</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">④ 防限流</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">各免费 API 独立窗口互不挤占，连续批量不触发单一模型 429</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">⑤ 窗口容量</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">原文堆进上下文会互相污染，加工后省窗口，长会话不爆</td></tr>
+      <tr><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#1a1a1a;font-weight:600;">⑥ 异构视角</td><td style="padding:7px 8px;border-bottom:1px solid #eee;color:#333;">多模型交叉 + judge 仲裁，防单模型偏见，关键判断更抗错</td></tr>
+    </tbody>
+  </table>
+
+  <section style="background:#1a1a1a;color:#fff;border-radius:6px;padding:14px 18px;margin:0 0 14px;font-size:14px;line-height:1.7;">
+    <b style="color:#E8730A;">一句话</b>：省 token 只是第 1 维，后 5 维（并行 / 专注度 / 防限流 / 窗口 / 异构）更根本——<b>傀儡池的本质是"注意力解放器 + 并行手脚"，不是省钱工具</b>。
+  </section>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">十二、性价比与推荐组合</section>
+
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;"><b style="color:#1a1a1a;">✅ 日常主力推荐</b>：Agnes agnes-2.5-flash（2026-08-22 实测国内站 0.7s 返回，推理模型质量最高）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">文本主力备选：智谱 glm-4-flash</b>（实测 0.4-2.2s，免费档稳定，但账户需有免费配额）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">图像/视频任务</b> → Agnes AI（三模态免费 + 国内直连）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">复杂推理/代码</b> → DeepSeek（中文理解天花板，输入 ¥1/百万）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">付费高性价比</b> → DeepSeek deepseek-chat（¥1/百万输入，比多数海外 API 便宜一个数量级）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">多模型测试/专业评估</b> → OpenRouter（实测国内可直连，18个免费模型，但热门模型偶发上游429限流，需重试）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">速度优先</b> → Groq（LPU 硬件 1000+ tok/s，免费档，<b style="color:#f85149;">⚠️ 需代理</b>）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">批量吞吐</b> → NVIDIA NIM（约 40 RPM 无日上限）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">额度大/联网搜索</b> → 讯飞星火 SparkLite（永久无限 Token + 免费联网搜索）</p>
+  <p style="font-size:15px;line-height:1.8;color:#555;margin:0 0 14px;">· <b style="color:#1a1a1a;">长上下文 1M</b> → Google Gemini（需代理）</p>
+
+  <p style="font-size:14px;font-weight:600;color:#333;margin:24px 0 8px;">特别注意</p>
+
+  <section style="background:#f7f7f5;padding:14px 16px;margin:0 0 14px;border-radius:4px;border-left:3px solid #f59e0b;">
+    <p style="font-size:13px;line-height:1.7;color:#555;margin:0;">⚠️ 免费不等于稳定，2026-08-22 实测数据：<br>
+    • Agnes agnes-2.5-flash：国内站 0.7s 稳定 ✅（推理模型，质量最高）<br>
+    • Agnes agnes-2.5-pro：0.5-3.3s，偶发超时 30s ⚠️（免费档不稳定，不建议主力）<br>
+    • 智谱 glm-4-flash：0.4-2.2s 基本稳定 ✅（账户需有免费配额，付费模型报余额不足）<br>
+    • OpenRouter nemotron-3.5-free：1.1-1.4s 稳定 ✅（但 glm-5.2:free 等热门模型上游 429 限流）<br>
+    <b style="color:#1a1a1a;">✅ 最佳方案</b><br>
+    1. 日常需求：Agnes agnes-2.5-flash（国内站直连，0.7s，永久免费，推理模型）<br>
+    <b>2. 深度任务</b>：DeepSeek（付费档 ¥1/百万Token，中文分析最强）<br>
+    <b>3. 多模态生成</b>：Agnes AI（文本/图像/视频皆可免费）<br>
+    <b>4. 多平台对比实验</b>：OpenRouter（国内可直连，自由切换模型，付费升级解锁更多额度）<br>
+    <b>5. 傀儡基础活</b>：收编 agnes-2.5 / agnes-2.0 / glm-4-flash / 讯飞 lite 四个稳定接口，专职分类/打标/摘要/改写，并行干活</p>
+  </section>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">十三、仲裁的进化：为什么裁判不能让模型家族内部产生</section>
+
+  <p style="font-size:15px;color:#1a1a1a;line-height:1.8;margin:0 0 12px;">这套体系跑了一周后，被一项研究打脸了。</p>
+  <p style="font-size:15px;color:#1a1a1a;line-height:1.8;margin:0 0 12px;">我的用法是：重要判断让两个不同模型交叉验证，不一致时让第三个模型当裁判。听起来很稳——直到读到 LLM-as-Judge 的研究：裁判模型会给<b>自己同家族的输出</b>系统性加 5%~25% 的分（自偏好偏差）；裁判还有位置偏差，先出现的答案天然占优 10~15 个百分点，而且这种偏差长在模型的解码机制里，<b>写提示词求它"公平公正"基本没用</b>。</p>
+  <p style="font-size:15px;color:#1a1a1a;line-height:1.8;margin:0 0 12px;">自查了一下：我的裁判恰好和其中一位选手同源——而且不止一处。两个"看起来很稳"的仲裁安排，都是同族裁判。</p>
+  <p style="font-size:15px;color:#1a1a1a;line-height:1.8;margin:0 0 12px;">修正方案想了三层：换异族裁判？可以，但裁判能力天花板摆在那。双序各跑一遍？偏差压下去了，成本翻倍。最后选了最简单的：<b>撤掉傀儡裁判，仲裁这件事回归主模型</b>——主模型看两个答案和原文，直接判断哪个对，而不是做"A 还是 B"的选择题。判断权本来就该在主模型手里，仲裁也是判断。</p>
+
+  <section style="background:#f7f7f5;padding:12px 16px;margin:16px 0;border-radius:4px;border-left:3px solid #E8730A;">
+  <p style="font-size:14px;color:#1a1a1a;line-height:1.8;margin:0;"><b>顺带的收获：给每个任务写"验收标准"</b><br>另一个框架的实践启发了我：给 AI 的任务必须写清"什么样的输出算合格"，写模糊，AI 就交"差不多的东西"糊弄。我给每类任务补了验收标准——分类必须逐行对应、打标不许出现乱码、摘要不许丢关键事实。傀儡返回后对照着扫一眼，"感觉好像不太对"就变成了"对照验收，第 2 条不符"。判断有了锚点，模糊地带就消失了。</p>
+  </section>
+
+  <p style="font-size:15px;color:#1a1a1a;line-height:1.8;margin:0 0 12px;">这一轮迭代沉淀下来一句话：<b>能写死的规则写死（切换路径、数量阈值、验收标准），需要理解的判断放权（选谁干活、结果可不可信、最终结论）</b>。分层不是官僚，是稳定性的来源——写死的部分不依赖模型发挥，放权的部分才值得动用最贵的注意力。</p>
+
+  <section style="padding-left:10px;border-left:3px solid #E8730A;font-size:17px;font-weight:700;color:#1a1a1a;margin:36px 0 10px;">十四、数据来源说明</section>
+
+  <p style="font-size:13px;color:#666;line-height:1.7;margin:0 0 10px;">数据截至 2026-08-22，来源：Agnes AI 官方、智谱开放平台、DeepSeek 定价页、Google AI Studio、SiliconFlow、NVIDIA NIM、GitHub Models、OpenRouter 官方及公开资料，多元搜索引擎（Groq/Cerebras/Mistral/Cloudflare/讯飞星火/腾讯混元/阿里百炼等平台官方文档与公开评测）核实。标注「✅实测」项为 2026-08-22 真实 API 调用结果（含响应时间），标注「📚」为公开资料核实。结论时效短，免费政策与付费价格可能随时调整，以各平台官网定价页最新公告为准。</p>
+
+  <section style="margin-top:32px;padding-top:16px;border-top:1px solid #eee;font-size:12px;color:#999;line-height:1.7;">
+    <p style="margin:0 0 4px;"><span style="color:#E8730A;font-weight:700;">「KuMoo」</span> · 弱者投资体系</p>
+    <p style="margin:0 0 4px;">稳定的傀儡编排AI模型API接入指南 Ver3.1 · 素观设计 SuGuan Ver1.8.0 · 全内联样式公众号版（新增「十三、仲裁的进化」——同族裁判偏差判例 + 验收标准 + 写死/放权分层）</p>
+    <p style="margin:0;color:#bbb;">极简是去除噪音不是减少信息 · 颜色是信号不是装饰 · 一致性就是品牌</p>
+  </section>
+
+</section>
+<!-- 公众号正文结束 -->
+</div>
+</body>
+</html>
